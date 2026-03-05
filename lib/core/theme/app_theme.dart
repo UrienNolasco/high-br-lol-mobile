@@ -18,7 +18,7 @@ abstract final class AppTheme {
         elevation: 0,
         centerTitle: false,
         titleTextStyle: AppTypography.headlineLarge,
-        iconTheme: const IconThemeData(color: AppColors.textSecondary),
+        iconTheme: IconThemeData(color: AppColors.textSecondary),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.bgSecondary,
