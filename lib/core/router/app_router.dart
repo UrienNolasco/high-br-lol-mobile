@@ -7,7 +7,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const Scaffold(
-        body: Center(child: Text('Player Search — em construcao')),
+        body: Center(child: Text('Player Search — em construção')),
       ),
     ),
   ],
