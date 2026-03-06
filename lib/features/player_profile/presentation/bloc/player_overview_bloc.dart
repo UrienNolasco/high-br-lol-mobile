@@ -1,0 +1,32 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/network/api_exception.dart';
+import '../../domain/usecases/get_player_overview.dart';
+import 'player_overview_event.dart';
+import 'player_overview_state.dart';
+
+@injectable
+class PlayerOverviewBloc
+    extends Bloc<PlayerOverviewEvent, PlayerOverviewState> {
+  PlayerOverviewBloc(this._getPlayerOverview)
+      : super(const OverviewLoading()) {
+    on<OverviewStarted>(_onStarted);
+  }
+
+  final GetPlayerOverview _getPlayerOverview;
+
+  Future<void> _onStarted(
+    OverviewStarted event,
+    Emitter<PlayerOverviewState> emit,
+  ) async {
+    emit(const OverviewLoading());
+    try {
+      final data = await _getPlayerOverview(puuid: event.puuid);
+      emit(OverviewLoaded(data));
+    } on ApiException catch (e) {
+      emit(OverviewError(e.message));
+    } catch (_) {
+      emit(const OverviewError('Erro ao carregar dados.'));
+    }
+  }
+}
