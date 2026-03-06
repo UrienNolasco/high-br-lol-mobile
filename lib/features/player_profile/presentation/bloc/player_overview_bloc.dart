@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/network/api_exception.dart';
@@ -24,8 +25,10 @@ class PlayerOverviewBloc
       final data = await _getPlayerOverview(puuid: event.puuid);
       emit(OverviewLoaded(data));
     } on ApiException catch (e) {
+      log('PlayerOverviewBloc: ApiException → ${e.message}');
       emit(OverviewError(e.message));
-    } catch (_) {
+    } catch (e, stack) {
+      log('PlayerOverviewBloc: unexpected error', error: e, stackTrace: stack);
       emit(const OverviewError('Erro ao carregar dados.'));
     }
   }

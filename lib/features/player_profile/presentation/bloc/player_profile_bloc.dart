@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/network/api_exception.dart';
@@ -33,8 +34,10 @@ class PlayerProfileBloc
       emit(ProfileLoaded(player: player));
       _startPolling();
     } on ApiException catch (e) {
+      log('PlayerProfileBloc: ApiException → ${e.message}');
       emit(ProfileError(e.message));
-    } catch (_) {
+    } catch (e, stack) {
+      log('PlayerProfileBloc: unexpected error', error: e, stackTrace: stack);
       emit(const ProfileError('Erro ao carregar perfil.'));
     }
   }
@@ -57,8 +60,10 @@ class PlayerProfileBloc
           processingStatus: status,
         ));
       }
-    } on ApiException {
-      // Silent retry on next poll cycle
+    } on ApiException catch (e) {
+      log('PlayerProfileBloc: polling error → ${e.message}');
+    } catch (e, stack) {
+      log('PlayerProfileBloc: polling unexpected error', error: e, stackTrace: stack);
     }
   }
 

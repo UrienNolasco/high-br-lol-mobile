@@ -1,4 +1,7 @@
+import 'dart:developer' as developer;
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import '../constants/app_constants.dart';
 import 'api_exception.dart';
@@ -6,6 +9,14 @@ import 'api_exception.dart';
 @lazySingleton
 class ApiClient {
   ApiClient() : _dio = Dio(_baseOptions) {
+    if (kDebugMode) {
+      _dio.interceptors.add(LogInterceptor(
+        requestHeader: false,
+        requestBody: true,
+        responseBody: true,
+        logPrint: (msg) => developer.log(msg.toString(), name: 'HTTP'),
+      ));
+    }
     _dio.interceptors.add(_errorInterceptor);
   }
 
