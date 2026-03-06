@@ -9,6 +9,7 @@ abstract final class ApiEndpoints {
   static String playerMatches(String puuid) => '/players/$puuid/matches/page';
   static String playerSyncStatus(String puuid) =>
       '/players/$puuid/sync-status';
+  static String playerStatus(String puuid) => '/players/$puuid/status';
 
   // Matches
   static String matchDetails(String matchId) => '/matches/$matchId';

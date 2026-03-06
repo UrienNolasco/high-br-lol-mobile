@@ -30,7 +30,10 @@ class _PlayerSearchView extends StatelessWidget {
     return BlocListener<PlayerSearchBloc, PlayerSearchState>(
       listener: (context, state) {
         if (state is PlayerSearchSuccess) {
-          context.go('/search/player/${state.result.puuid}');
+          context.go(
+            '/search/player/${state.result.puuid}/processing',
+            extra: state.result,
+          );
         } else if (state is PlayerSearchFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

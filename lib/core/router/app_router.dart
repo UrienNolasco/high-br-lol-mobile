@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/player_search/presentation/pages/player_search_page.dart';
+import '../../features/player_search/presentation/pages/processing_status_page.dart';
+import '../../features/player_search/domain/entities/player_search_result.dart';
 import '../../shared/widgets/scaffold_with_nav_bar.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -39,6 +41,19 @@ final GoRouter appRouter = GoRouter(
                       ),
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      path: 'processing',
+                      builder: (context, state) {
+                        final result = state.extra as PlayerSearchResult;
+                        return ProcessingStatusPage(
+                          puuid: result.puuid,
+                          gameName: result.gameName,
+                          tagLine: result.tagLine,
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

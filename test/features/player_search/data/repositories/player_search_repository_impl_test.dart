@@ -4,6 +4,8 @@ import 'package:high_br_lol_mobile/features/player_search/data/datasources/playe
 import 'package:high_br_lol_mobile/features/player_search/data/models/player_search_result_model.dart';
 import 'package:high_br_lol_mobile/features/player_search/data/repositories/player_search_repository_impl.dart';
 import 'package:high_br_lol_mobile/core/network/api_exception.dart';
+import 'package:high_br_lol_mobile/features/player_search/data/models/processing_status_model.dart';
+import 'package:high_br_lol_mobile/features/player_search/domain/entities/processing_status.dart';
 
 class MockRemoteDataSource extends Mock
     implements PlayerSearchRemoteDataSource {}
@@ -50,5 +52,21 @@ void main() {
       () => repository.searchPlayer(gameName: 'BrTT', tagLine: 'BR1'),
       throwsA(isA<NotFoundException>()),
     );
+  });
+
+  test('should return ProcessingStatus when getPlayerStatus succeeds', () async {
+    const tStatus = ProcessingStatusModel(
+      status: UpdateStatus.updating,
+      matchesProcessed: 5,
+      matchesTotal: 20,
+      message: 'Processing matches: 5/20',
+    );
+    when(() => mockDataSource.getPlayerStatus(puuid: any(named: 'puuid')))
+        .thenAnswer((_) async => tStatus);
+
+    final result = await repository.getPlayerStatus(puuid: 'test-puuid');
+
+    expect(result, tStatus);
+    verify(() => mockDataSource.getPlayerStatus(puuid: 'test-puuid')).called(1);
   });
 }

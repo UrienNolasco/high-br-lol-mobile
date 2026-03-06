@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/network/api_endpoints.dart';
 import '../models/player_search_result_model.dart';
+import '../models/processing_status_model.dart';
 
 @lazySingleton
 class PlayerSearchRemoteDataSource {
@@ -18,6 +19,17 @@ class PlayerSearchRemoteDataSource {
       data: {'gameName': gameName, 'tagLine': tagLine},
     );
     return PlayerSearchResultModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  Future<ProcessingStatusModel> getPlayerStatus({
+    required String puuid,
+  }) async {
+    final response = await _apiClient.dio.get(
+      ApiEndpoints.playerStatus(puuid),
+    );
+    return ProcessingStatusModel.fromJson(
       response.data as Map<String, dynamic>,
     );
   }

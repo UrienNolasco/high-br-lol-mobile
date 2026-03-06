@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../domain/entities/player_search_result.dart';
+import '../../domain/entities/processing_status.dart';
 import '../../domain/repositories/player_search_repository.dart';
 import '../datasources/player_search_remote_datasource.dart';
 
@@ -18,5 +19,10 @@ class PlayerSearchRepositoryImpl implements PlayerSearchRepository {
       gameName: gameName,
       tagLine: tagLine,
     );
+  }
+
+  @override
+  Future<ProcessingStatus> getPlayerStatus({required String puuid}) {
+    return _remoteDataSource.getPlayerStatus(puuid: puuid);
   }
 }
