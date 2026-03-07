@@ -10,6 +10,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:high_br_lol_mobile/core/di/shared_preferences_module.dart'
+    as _i251;
 import 'package:high_br_lol_mobile/core/network/api_client.dart' as _i998;
 import 'package:high_br_lol_mobile/features/player_profile/data/datasources/player_profile_remote_datasource.dart'
     as _i629;
@@ -27,6 +29,8 @@ import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/pla
     as _i252;
 import 'package:high_br_lol_mobile/features/player_search/data/datasources/player_search_remote_datasource.dart'
     as _i255;
+import 'package:high_br_lol_mobile/features/player_search/data/datasources/recent_searches_local_datasource.dart'
+    as _i53;
 import 'package:high_br_lol_mobile/features/player_search/data/repositories/player_search_repository_impl.dart'
     as _i1072;
 import 'package:high_br_lol_mobile/features/player_search/domain/repositories/player_search_repository.dart'
@@ -40,14 +44,20 @@ import 'package:high_br_lol_mobile/features/player_search/presentation/bloc/play
 import 'package:high_br_lol_mobile/features/player_search/presentation/bloc/processing_status_bloc.dart'
     as _i757;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final sharedPreferencesModule = _$SharedPreferencesModule();
+    await gh.lazySingletonAsync<_i460.SharedPreferences>(
+      () => sharedPreferencesModule.prefs,
+      preResolve: true,
+    );
     gh.lazySingleton<_i998.ApiClient>(() => _i998.ApiClient());
     gh.lazySingleton<_i629.PlayerProfileRemoteDataSource>(
       () => _i629.PlayerProfileRemoteDataSource(gh<_i998.ApiClient>()),
@@ -59,6 +69,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1072.PlayerSearchRepositoryImpl(
         gh<_i255.PlayerSearchRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i53.RecentSearchesLocalDataSource>(
+      () => _i53.RecentSearchesLocalDataSource(gh<_i460.SharedPreferences>()),
     );
     gh.lazySingleton<_i295.PlayerProfileRepository>(
       () => _i539.PlayerProfileRepositoryImpl(
@@ -77,11 +90,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i138.GetPlayerProfile>(
       () => _i138.GetPlayerProfile(gh<_i295.PlayerProfileRepository>()),
     );
-    gh.factory<_i1041.PlayerSearchBloc>(
-      () => _i1041.PlayerSearchBloc(gh<_i731.SearchPlayer>()),
-    );
     gh.factory<_i945.PlayerOverviewBloc>(
       () => _i945.PlayerOverviewBloc(gh<_i136.GetPlayerOverview>()),
+    );
+    gh.factory<_i1041.PlayerSearchBloc>(
+      () => _i1041.PlayerSearchBloc(
+        gh<_i731.SearchPlayer>(),
+        gh<_i53.RecentSearchesLocalDataSource>(),
+      ),
     );
     gh.factory<_i252.PlayerProfileBloc>(
       () => _i252.PlayerProfileBloc(
@@ -95,3 +111,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$SharedPreferencesModule extends _i251.SharedPreferencesModule {}

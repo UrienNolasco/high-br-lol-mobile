@@ -31,4 +31,16 @@ abstract final class AppColors {
   static const Color tierB = Color(0xFF3B82F6);
   static const Color tierC = Color(0xFF7A8599);
   static const Color tierD = Color(0xFF3D4654);
+
+  // Rank Tier colors (player ranked league)
+  static const Color rankChallenger = Color(0xFFDC2626);
+  static const Color rankGrandmaster = Color(0xFFDC2626);
+  static const Color rankMaster = Color(0xFFA855F7);
+  static const Color rankDiamond = Color(0xFF3B82F6);
+  static const Color rankEmerald = Color(0xFF22C55E);
+  static const Color rankPlatinum = Color(0xFF06B6D4);
+  static const Color rankGold = Color(0xFFF59E0B);
+  static const Color rankSilver = Color(0xFF7A8599);
+  static const Color rankBronze = Color(0xFFCD7F32);
+  static const Color rankIron = Color(0xFF3D4654);
 }

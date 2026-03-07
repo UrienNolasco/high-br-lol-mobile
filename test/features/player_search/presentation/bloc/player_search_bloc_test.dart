@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:high_br_lol_mobile/features/player_search/domain/entities/player_search_result.dart';
 import 'package:high_br_lol_mobile/features/player_search/domain/usecases/search_player.dart';
+import 'package:high_br_lol_mobile/features/player_search/data/datasources/recent_searches_local_datasource.dart';
+import 'package:high_br_lol_mobile/features/player_search/data/models/recent_search_model.dart';
 import 'package:high_br_lol_mobile/features/player_search/presentation/bloc/player_search_bloc.dart';
 import 'package:high_br_lol_mobile/features/player_search/presentation/bloc/player_search_event.dart';
 import 'package:high_br_lol_mobile/features/player_search/presentation/bloc/player_search_state.dart';
@@ -10,13 +12,29 @@ import 'package:high_br_lol_mobile/core/network/api_exception.dart';
 
 class MockSearchPlayer extends Mock implements SearchPlayer {}
 
+class MockRecentSearchesLocalDataSource extends Mock
+    implements RecentSearchesLocalDataSource {}
+
 void main() {
   late PlayerSearchBloc bloc;
   late MockSearchPlayer mockSearchPlayer;
+  late MockRecentSearchesLocalDataSource mockRecentSearches;
+
+  setUpAll(() {
+    registerFallbackValue(RecentSearchModel(
+      puuid: 'fallback',
+      gameName: 'fallback',
+      tagLine: 'fallback',
+      searchedAt: DateTime(2026),
+    ));
+  });
 
   setUp(() {
     mockSearchPlayer = MockSearchPlayer();
-    bloc = PlayerSearchBloc(mockSearchPlayer);
+    mockRecentSearches = MockRecentSearchesLocalDataSource();
+    when(() => mockRecentSearches.getRecentSearches()).thenReturn([]);
+    when(() => mockRecentSearches.saveSearch(any())).thenAnswer((_) async {});
+    bloc = PlayerSearchBloc(mockSearchPlayer, mockRecentSearches);
   });
 
   tearDown(() => bloc.close());
@@ -47,8 +65,8 @@ void main() {
       const PlayerSearchSubmitted(gameName: 'BrTT', tagLine: 'BR1'),
     ),
     expect: () => [
-      const PlayerSearchLoading(),
-      const PlayerSearchSuccess(tResult),
+      const PlayerSearchLoading(recentSearches: []),
+      const PlayerSearchSuccess(tResult, recentSearches: []),
     ],
   );
 
@@ -65,8 +83,8 @@ void main() {
       const PlayerSearchSubmitted(gameName: 'Unknown', tagLine: 'BR1'),
     ),
     expect: () => [
-      const PlayerSearchLoading(),
-      const PlayerSearchFailure('Jogador nao encontrado.'),
+      const PlayerSearchLoading(recentSearches: []),
+      const PlayerSearchFailure('Jogador nao encontrado.', recentSearches: []),
     ],
   );
 
@@ -83,8 +101,11 @@ void main() {
       const PlayerSearchSubmitted(gameName: 'Test', tagLine: 'BR1'),
     ),
     expect: () => [
-      const PlayerSearchLoading(),
-      const PlayerSearchFailure('Erro inesperado. Tente novamente.'),
+      const PlayerSearchLoading(recentSearches: []),
+      const PlayerSearchFailure(
+        'Erro inesperado. Tente novamente.',
+        recentSearches: [],
+      ),
     ],
   );
 }
