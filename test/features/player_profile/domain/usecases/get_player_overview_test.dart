@@ -25,7 +25,7 @@ void main() {
     games: 270, winRate: 55.6, kda: 3.42, csPerMin: 7.8, dpm: 624,
   );
   const tChampions = [
-    PlayerChampion(name: 'Ahri', games: 68, winRate: 61.8, iconId: 103),
+    PlayerChampion(name: 'Ahri', games: 68, winRate: 61.8, iconId: 103, imageUrl: 'https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Ahri.png'),
   ];
   const tRoles = [
     PlayerRole(role: 'MID', games: 142, winRate: 58.0),

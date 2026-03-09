@@ -11,11 +11,11 @@ class PlayerSummaryModel extends PlayerSummary {
 
   factory PlayerSummaryModel.fromJson(Map<String, dynamic> json) {
     return PlayerSummaryModel(
-      games: json['games'] as int,
+      games: json['gamesPlayed'] as int,
       winRate: (json['winRate'] as num).toDouble(),
-      kda: (json['kda'] as num).toDouble(),
-      csPerMin: (json['csPerMin'] as num).toDouble(),
-      dpm: json['dpm'] as int,
+      kda: (json['avgKda'] as num).toDouble(),
+      csPerMin: (json['avgCspm'] as num).toDouble(),
+      dpm: (json['avgDpm'] as num).toDouble(),
     );
   }
 }

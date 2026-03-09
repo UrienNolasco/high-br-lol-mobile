@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/player_champion.dart';
@@ -22,13 +23,24 @@ class TopChampionsCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
-                // Icon placeholder
-                Container(
-                  width: 28,
-                  height: 28,
-                  decoration: BoxDecoration(
-                    color: AppColors.bgTertiary,
-                    borderRadius: BorderRadius.circular(6),
+                // Champion icon
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: CachedNetworkImage(
+                    imageUrl: champ.imageUrl,
+                    width: 28,
+                    height: 28,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      width: 28,
+                      height: 28,
+                      color: AppColors.bgTertiary,
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: 28,
+                      height: 28,
+                      color: AppColors.bgTertiary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),

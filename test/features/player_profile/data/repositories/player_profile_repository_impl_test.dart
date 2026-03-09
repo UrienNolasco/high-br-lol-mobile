@@ -65,7 +65,7 @@ void main() {
   test('should return champion list when getPlayerChampions succeeds',
       () async {
     const tChampions = [
-      PlayerChampionModel(name: 'Ahri', games: 68, winRate: 61.8, iconId: 103),
+      PlayerChampionModel(name: 'Ahri', games: 68, winRate: 61.8, iconId: 103, imageUrl: 'https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Ahri.png'),
     ];
     when(() => mockDataSource.getPlayerChampions(puuid: any(named: 'puuid')))
         .thenAnswer((_) async => tChampions);

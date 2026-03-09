@@ -2328,7 +2328,7 @@
                       "id": "mfGqn",
                       "name": "sg2v",
                       "fill": "$win",
-                      "content": "55.6%",
+                      "content": "55.6",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 18,
                       "fontWeight": "600"
@@ -2338,7 +2338,7 @@
                       "id": "kT5hh",
                       "name": "sg2l",
                       "fill": "$text-secondary",
-                      "content": "WR",
+                      "content": "WR%",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 9,
                       "fontWeight": "500"
@@ -2739,6 +2739,69 @@
               "gap": 6,
               "padding": 10,
               "children": [
+                {
+                  "type": "frame",
+                  "id": "ld7pV",
+                  "name": "champHeader",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$border"
+                  },
+                  "gap": 10,
+                  "padding": [
+                    0,
+                    4,
+                    6,
+                    4
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MjBdK",
+                      "name": "hdrSpc",
+                      "width": 28,
+                      "height": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "GvQcS",
+                      "name": "hdrName",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "CHAMPION",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 9,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "XWbqW",
+                      "name": "hdrG",
+                      "fill": "$text-muted",
+                      "content": "G",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eklGe",
+                      "name": "hdrWR",
+                      "fill": "$text-muted",
+                      "content": "WR%",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 9,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
                 {
                   "type": "frame",
                   "id": "nrnaa",
@@ -6790,6 +6853,736 @@
               "fill": "$accent"
             }
           }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ofx9n",
+      "x": 3640,
+      "y": 0,
+      "name": "Screen/ChampionsTab",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "N5NXt",
+          "name": "StatusBar",
+          "width": "fill_container",
+          "height": 44,
+          "padding": [
+            12,
+            24,
+            0,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "JH492",
+              "name": "time4",
+              "fill": "$text-primary",
+              "content": "9:41",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 15,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "kRZPv",
+              "name": "icons4",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "LCQAc",
+                  "name": "si4",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "signal_cellular_alt",
+                  "iconFontFamily": "Material Symbols Rounded",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "Z7VVR",
+                  "name": "wi4",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "wifi",
+                  "iconFontFamily": "Material Symbols Rounded",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "8sGq1",
+                  "name": "bi4",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "battery_full",
+                  "iconFontFamily": "Material Symbols Rounded",
+                  "fill": "$text-primary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cRABP",
+          "name": "backRow4",
+          "width": "fill_container",
+          "gap": 8,
+          "padding": [
+            4,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "Y3q3v",
+              "name": "backIcon4",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "arrow_back",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$text-primary"
+            },
+            {
+              "type": "text",
+              "id": "ATe5A",
+              "name": "backText4",
+              "fill": "$text-primary",
+              "content": "Perfil",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 16,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qCFnq",
+          "name": "ProfileHeader",
+          "width": "fill_container",
+          "gap": 14,
+          "padding": [
+            12,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ZhwLh",
+              "name": "profIcon",
+              "width": 56,
+              "height": 56,
+              "fill": "$bg-tertiary",
+              "cornerRadius": 28
+            },
+            {
+              "type": "frame",
+              "id": "Rpi5j",
+              "name": "profInfo",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bAzqf",
+                  "name": "profNameRow",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "C45nE",
+                      "name": "profName",
+                      "fill": "$text-primary",
+                      "content": "UrienMano#BR1",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "I5mfe",
+                  "name": "rankRow",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "VaGq5",
+                      "type": "ref",
+                      "ref": "jKBI3",
+                      "fill": "$tier-s-plus",
+                      "name": "tierBadge",
+                      "descendants": {
+                        "mdOHe": {
+                          "content": "CH"
+                        }
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "USzvn",
+                      "name": "rankText",
+                      "fill": "$gold",
+                      "content": "CHALLENGER 1,234 LP",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CbJW7",
+                  "name": "wlRow",
+                  "gap": 4,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "d4PUU",
+                      "name": "wlText",
+                      "fill": "$text-secondary",
+                      "content": "150W 120L",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DRJMD",
+                      "name": "wrSep",
+                      "fill": "$text-muted",
+                      "content": "·",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6cb4K",
+                      "name": "wrVal",
+                      "fill": "$win",
+                      "content": "55.6%",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yKP6w",
+          "name": "ProcessingBanner",
+          "opacity": 0.9,
+          "width": "fill_container",
+          "fill": "$accent",
+          "gap": 8,
+          "padding": [
+            8,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "eoOjD",
+              "name": "processIcon",
+              "width": 16,
+              "height": 16,
+              "iconFontName": "sync",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "#FFFFFF"
+            },
+            {
+              "type": "text",
+              "id": "3KcPD",
+              "name": "processText",
+              "fill": "#FFFFFF",
+              "content": "Processando partidas... 5/20",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Lnd0X",
+          "name": "ProfileTabs",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$border"
+          },
+          "padding": [
+            0,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "4Vi3Z",
+              "name": "tab1",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "padding": [
+                12,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mByHj",
+                  "name": "tab1Text",
+                  "fill": "$text-secondary",
+                  "content": "Overview",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "hqrci",
+                  "name": "tab1Line",
+                  "width": "fill_container",
+                  "height": 2,
+                  "fill": "#00000000",
+                  "cornerRadius": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lnxWq",
+              "name": "tab2",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "padding": [
+                12,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0vYsK",
+                  "name": "tab2Text",
+                  "fill": "$accent",
+                  "content": "Champions",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "tJ1IG",
+                  "name": "tab2Line",
+                  "width": "fill_container",
+                  "height": 2,
+                  "fill": "$accent",
+                  "cornerRadius": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Jt1EU",
+              "name": "tab3",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "padding": [
+                12,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ZCb2L",
+                  "name": "tab3Text",
+                  "fill": "$text-secondary",
+                  "content": "Matches",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "MoZoc",
+                  "name": "tab3Line",
+                  "width": "fill_container",
+                  "height": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "1lVAd",
+              "name": "tab4",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "padding": [
+                12,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0pcSx",
+                  "name": "tab4Text",
+                  "fill": "$text-secondary",
+                  "content": "Atividade",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "zI761",
+                  "name": "tab4Line",
+                  "width": "fill_container",
+                  "height": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XfR3r",
+          "name": "ChampionsContent",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            12,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "dGXI5",
+              "name": "roleFilter",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "id": "TbbKs",
+                  "type": "ref",
+                  "ref": "t3lkm",
+                  "name": "allPill",
+                  "descendants": {
+                    "d6jqO": {
+                      "content": "ALL"
+                    }
+                  }
+                },
+                {
+                  "id": "pln2i",
+                  "type": "ref",
+                  "ref": "Qvoup",
+                  "name": "topPill",
+                  "descendants": {
+                    "raVGf": {
+                      "content": "TOP"
+                    }
+                  }
+                },
+                {
+                  "id": "Y79Wf",
+                  "type": "ref",
+                  "ref": "Qvoup",
+                  "name": "jglPill",
+                  "descendants": {
+                    "raVGf": {
+                      "content": "JGL"
+                    }
+                  }
+                },
+                {
+                  "id": "eGu2D",
+                  "type": "ref",
+                  "ref": "Qvoup",
+                  "name": "midPill",
+                  "descendants": {
+                    "raVGf": {
+                      "content": "MID"
+                    }
+                  }
+                },
+                {
+                  "id": "t29qn",
+                  "type": "ref",
+                  "ref": "Qvoup",
+                  "name": "botPill",
+                  "descendants": {
+                    "raVGf": {
+                      "content": "BOT"
+                    }
+                  }
+                },
+                {
+                  "id": "zwJ7E",
+                  "type": "ref",
+                  "ref": "Qvoup",
+                  "name": "supPill",
+                  "descendants": {
+                    "raVGf": {
+                      "content": "SUP"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KWwGd",
+              "name": "sortRow",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "id": "1IKdT",
+                  "type": "ref",
+                  "ref": "phGaa",
+                  "name": "gamesChip",
+                  "descendants": {
+                    "Z0ze7": {
+                      "content": "Games"
+                    }
+                  }
+                },
+                {
+                  "id": "x402E",
+                  "type": "ref",
+                  "ref": "y0gdE",
+                  "name": "wrChip",
+                  "descendants": {
+                    "KPxS1": {
+                      "content": "Win Rate"
+                    }
+                  }
+                },
+                {
+                  "id": "eznvg",
+                  "type": "ref",
+                  "ref": "y0gdE",
+                  "name": "kdaChip",
+                  "descendants": {
+                    "KPxS1": {
+                      "content": "KDA"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "sxwbQ",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c1",
+              "descendants": {
+                "8hsXC": {
+                  "content": "1"
+                },
+                "dGZiE": {
+                  "content": "Ahri"
+                },
+                "xCSC0": {
+                  "content": "MID"
+                },
+                "GsRFj": {
+                  "fill": "$tier-s"
+                },
+                "GsRFj/mdOHe": {
+                  "content": "S"
+                },
+                "FbaIr": {
+                  "content": "61.8%",
+                  "fill": "$win"
+                },
+                "RGiS6": {
+                  "content": "68 games"
+                }
+              }
+            },
+            {
+              "id": "N9s0d",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c2",
+              "descendants": {
+                "8hsXC": {
+                  "content": "2"
+                },
+                "dGZiE": {
+                  "content": "Syndra"
+                },
+                "xCSC0": {
+                  "content": "MID"
+                },
+                "GsRFj": {
+                  "fill": "$tier-s"
+                },
+                "GsRFj/mdOHe": {
+                  "content": "S"
+                },
+                "FbaIr": {
+                  "content": "57.8%",
+                  "fill": "$win"
+                },
+                "RGiS6": {
+                  "content": "45 games"
+                }
+              }
+            },
+            {
+              "id": "p1Df8",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c3",
+              "descendants": {
+                "8hsXC": {
+                  "content": "3"
+                },
+                "dGZiE": {
+                  "content": "Aurora"
+                },
+                "xCSC0": {
+                  "content": "MID"
+                },
+                "FbaIr": {
+                  "content": "53.1%",
+                  "fill": "$cyan"
+                },
+                "RGiS6": {
+                  "content": "32 games"
+                }
+              }
+            },
+            {
+              "id": "sSHBK",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c4",
+              "descendants": {
+                "8hsXC": {
+                  "content": "4"
+                },
+                "dGZiE": {
+                  "content": "Viego"
+                },
+                "xCSC0": {
+                  "content": "JGL"
+                },
+                "GsRFj": {
+                  "fill": "$tier-b"
+                },
+                "GsRFj/mdOHe": {
+                  "content": "B"
+                },
+                "FbaIr": {
+                  "content": "50.0%",
+                  "fill": "$text-primary"
+                },
+                "RGiS6": {
+                  "content": "24 games"
+                }
+              }
+            },
+            {
+              "id": "32WtA",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c5",
+              "descendants": {
+                "8hsXC": {
+                  "content": "5"
+                },
+                "dGZiE": {
+                  "content": "LeBlanc"
+                },
+                "xCSC0": {
+                  "content": "MID"
+                },
+                "GsRFj": {
+                  "fill": "$tier-b"
+                },
+                "GsRFj/mdOHe": {
+                  "content": "B"
+                },
+                "FbaIr": {
+                  "content": "44.4%",
+                  "fill": "$loss"
+                },
+                "RGiS6": {
+                  "content": "18 games"
+                }
+              }
+            },
+            {
+              "id": "k2byz",
+              "type": "ref",
+              "ref": "9UCR4",
+              "width": "fill_container",
+              "name": "c6",
+              "descendants": {
+                "8hsXC": {
+                  "content": "6"
+                },
+                "dGZiE": {
+                  "content": "Zed"
+                },
+                "xCSC0": {
+                  "content": "MID"
+                },
+                "FbaIr": {
+                  "content": "58.3%",
+                  "fill": "$win"
+                },
+                "RGiS6": {
+                  "content": "12 games"
+                }
+              }
+            }
+          ]
         }
       ]
     }

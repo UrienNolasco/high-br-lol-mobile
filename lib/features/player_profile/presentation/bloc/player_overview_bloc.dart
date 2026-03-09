@@ -28,7 +28,9 @@ class PlayerOverviewBloc
       log('PlayerOverviewBloc: ApiException → ${e.message}');
       emit(OverviewError(e.message));
     } catch (e, stack) {
-      log('PlayerOverviewBloc: unexpected error', error: e, stackTrace: stack);
+      log('PlayerOverviewBloc: unexpected error → $e', error: e, stackTrace: stack);
+      print('DEBUG PlayerOverviewBloc: erro → $e');
+      print('DEBUG PlayerOverviewBloc: stack → $stack');
       emit(const OverviewError('Erro ao carregar dados.'));
     }
   }

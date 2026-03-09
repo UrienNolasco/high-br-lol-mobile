@@ -10,7 +10,7 @@ class PlayerRoleModel extends PlayerRole {
   factory PlayerRoleModel.fromJson(Map<String, dynamic> json) {
     return PlayerRoleModel(
       role: json['role'] as String,
-      games: json['games'] as int,
+      games: json['gamesPlayed'] as int,
       winRate: (json['winRate'] as num).toDouble(),
     );
   }

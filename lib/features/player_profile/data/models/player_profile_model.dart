@@ -22,8 +22,8 @@ class PlayerProfileModel extends PlayerProfile {
       tier: json['tier'] as String,
       rank: json['rank'] as String,
       leaguePoints: json['leaguePoints'] as int,
-      wins: json['wins'] as int,
-      losses: json['losses'] as int,
+      wins: json['rankedWins'] as int,
+      losses: json['rankedLosses'] as int,
     );
   }
 }

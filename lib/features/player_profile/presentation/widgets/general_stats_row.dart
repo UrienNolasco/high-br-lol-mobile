@@ -36,7 +36,7 @@ class GeneralStatsRow extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         _StatCard(
-          value: '${summary.dpm}',
+          value: summary.dpm.toStringAsFixed(0),
           label: 'DPM',
           valueColor: AppColors.textPrimary,
         ),

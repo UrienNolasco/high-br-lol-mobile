@@ -41,7 +41,8 @@ class PlayerProfileRemoteDataSource {
     final response = await _apiClient.dio.get(
       ApiEndpoints.playerChampions(puuid),
     );
-    final list = response.data as List<dynamic>;
+    final data = response.data as Map<String, dynamic>;
+    final list = data['champions'] as List<dynamic>;
     return list
         .map((e) => PlayerChampionModel.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -53,7 +54,8 @@ class PlayerProfileRemoteDataSource {
     final response = await _apiClient.dio.get(
       ApiEndpoints.playerRoles(puuid),
     );
-    final list = response.data as List<dynamic>;
+    final data = response.data as Map<String, dynamic>;
+    final list = data['roles'] as List<dynamic>;
     return list
         .map((e) => PlayerRoleModel.fromJson(e as Map<String, dynamic>))
         .toList();

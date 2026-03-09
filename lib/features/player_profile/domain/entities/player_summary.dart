@@ -13,7 +13,7 @@ class PlayerSummary extends Equatable {
   final double winRate;
   final double kda;
   final double csPerMin;
-  final int dpm;
+  final double dpm;
 
   @override
   List<Object?> get props => [games, winRate, kda, csPerMin, dpm];
