@@ -18,8 +18,8 @@ class GeneralStatsRow extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         _StatCard(
-          value: '${summary.winRate.toStringAsFixed(1)}%',
-          label: 'WR',
+          value: summary.winRate.toStringAsFixed(1),
+          label: 'WR%',
           valueColor: AppColors.accent,
         ),
         const SizedBox(width: 6),
