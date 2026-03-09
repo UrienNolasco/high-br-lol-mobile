@@ -32,9 +32,8 @@ class RoleDistributionCard extends StatelessWidget {
                 SizedBox(
                   width: 32,
                   child: Text(
-                    role.role,
+                    _shortRoleName(role.role),
                     style: const TextStyle(
-                      fontFamily: 'JetBrainsMono',
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       color: AppColors.textSecondary,
@@ -76,7 +75,6 @@ class RoleDistributionCard extends StatelessWidget {
                     '${role.games}  ${role.winRate.toStringAsFixed(0)}%',
                     textAlign: TextAlign.right,
                     style: const TextStyle(
-                      fontFamily: 'JetBrainsMono',
                       fontSize: 10,
                       fontWeight: FontWeight.w500,
                       color: AppColors.textSecondary,
@@ -89,5 +87,15 @@ class RoleDistributionCard extends StatelessWidget {
         }).toList(),
       ),
     );
+  }
+
+  static String _shortRoleName(String role) {
+    const map = {
+      'MIDDLE': 'MID',
+      'JUNGLE': 'JGL',
+      'BOTTOM': 'BOT',
+      'UTILITY': 'SUP',
+    };
+    return map[role] ?? role;
   }
 }

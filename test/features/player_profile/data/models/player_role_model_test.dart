@@ -11,7 +11,7 @@ void main() {
 
   const tJson = {
     'role': 'MID',
-    'games': 142,
+    'gamesPlayed': 142,
     'winRate': 58.0,
   };
 

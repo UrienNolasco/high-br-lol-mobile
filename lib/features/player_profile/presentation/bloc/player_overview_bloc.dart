@@ -29,8 +29,6 @@ class PlayerOverviewBloc
       emit(OverviewError(e.message));
     } catch (e, stack) {
       log('PlayerOverviewBloc: unexpected error → $e', error: e, stackTrace: stack);
-      print('DEBUG PlayerOverviewBloc: erro → $e');
-      print('DEBUG PlayerOverviewBloc: stack → $stack');
       emit(const OverviewError('Erro ao carregar dados.'));
     }
   }

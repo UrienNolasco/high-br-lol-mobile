@@ -12,11 +12,11 @@ void main() {
   );
 
   const tJson = {
-    'games': 270,
+    'gamesPlayed': 270,
     'winRate': 55.6,
-    'kda': 3.42,
-    'csPerMin': 7.8,
-    'dpm': 624,
+    'avgKda': 3.42,
+    'avgCspm': 7.8,
+    'avgDpm': 624,
   };
 
   test('should be a subclass of PlayerSummary', () {
@@ -30,11 +30,11 @@ void main() {
 
   test('should handle int values for double fields', () {
     final json = {
-      'games': 270,
+      'gamesPlayed': 270,
       'winRate': 55,
-      'kda': 3,
-      'csPerMin': 7,
-      'dpm': 624,
+      'avgKda': 3,
+      'avgCspm': 7,
+      'avgDpm': 624,
     };
     final result = PlayerSummaryModel.fromJson(json);
     expect(result.winRate, 55.0);

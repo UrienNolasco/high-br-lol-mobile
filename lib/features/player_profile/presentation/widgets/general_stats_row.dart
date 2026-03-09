@@ -70,7 +70,6 @@ class _StatCard extends StatelessWidget {
             Text(
               value,
               style: TextStyle(
-                fontFamily: 'JetBrainsMono',
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: valueColor,
@@ -80,7 +79,6 @@ class _StatCard extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(
-                fontFamily: 'JetBrainsMono',
                 fontSize: 9,
                 fontWeight: FontWeight.w500,
                 color: AppColors.textSecondary,

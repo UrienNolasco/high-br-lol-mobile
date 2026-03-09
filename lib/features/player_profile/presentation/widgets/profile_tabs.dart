@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class ProfileTabs extends StatelessWidget {
-  const ProfileTabs({super.key, required this.selectedIndex});
+  const ProfileTabs({super.key, required this.selectedIndex, required this.onTap});
 
   final int selectedIndex;
+  final ValueChanged<int> onTap;
 
   static const _tabs = ['Overview', 'Champions', 'Matches', 'Atividade'];
 
@@ -22,7 +23,10 @@ class ProfileTabs extends StatelessWidget {
         children: List.generate(_tabs.length, (index) {
           final isActive = index == selectedIndex;
           return Expanded(
-            child: Column(
+            child: GestureDetector(
+              onTap: () => onTap(index),
+              behavior: HitTestBehavior.opaque,
+              child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -30,7 +34,6 @@ class ProfileTabs extends StatelessWidget {
                     _tabs[index],
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'JetBrainsMono',
                       fontSize: 13,
                       fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
                       color: isActive
@@ -44,6 +47,7 @@ class ProfileTabs extends StatelessWidget {
                   color: isActive ? AppColors.accent : Colors.transparent,
                 ),
               ],
+            ),
             ),
           );
         }),

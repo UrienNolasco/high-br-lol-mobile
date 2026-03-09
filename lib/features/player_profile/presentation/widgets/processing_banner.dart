@@ -20,7 +20,6 @@ class ProcessingBanner extends StatelessWidget {
           Text(
             'Processando partidas... ${status.matchesProcessed}/${status.matchesTotal}',
             style: const TextStyle(
-              fontFamily: 'JetBrainsMono',
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: Colors.white,

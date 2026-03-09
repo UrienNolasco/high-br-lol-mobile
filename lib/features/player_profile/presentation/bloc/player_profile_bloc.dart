@@ -38,8 +38,6 @@ class PlayerProfileBloc
       emit(ProfileError(e.message));
     } catch (e, stack) {
       log('PlayerProfileBloc: unexpected error → $e', error: e, stackTrace: stack);
-      print('DEBUG PlayerProfileBloc: erro → $e');
-      print('DEBUG PlayerProfileBloc: stack → $stack');
       emit(const ProfileError('Erro ao carregar perfil.'));
     }
   }

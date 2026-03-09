@@ -168,7 +168,6 @@ class _ProcessingStatusView extends StatelessWidget {
             child: const Text(
               'Tentar novamente',
               style: TextStyle(
-                fontFamily: 'JetBrainsMono',
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
@@ -190,7 +189,6 @@ class _ProcessingStatusView extends StatelessWidget {
             child: const Text(
               'Voltar',
               style: TextStyle(
-                fontFamily: 'JetBrainsMono',
                 fontWeight: FontWeight.w600,
                 color: AppColors.textSecondary,
               ),

@@ -68,7 +68,6 @@ class RecentSearchRow extends StatelessWidget {
               child: Text(
                 tierLabel,
                 style: const TextStyle(
-                  fontFamily: 'JetBrainsMono',
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,

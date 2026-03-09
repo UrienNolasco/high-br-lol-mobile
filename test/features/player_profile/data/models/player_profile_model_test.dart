@@ -23,8 +23,8 @@ void main() {
     'tier': 'CHALLENGER',
     'rank': 'I',
     'leaguePoints': 1234,
-    'wins': 150,
-    'losses': 120,
+    'rankedWins': 150,
+    'rankedLosses': 120,
   };
 
   test('should be a subclass of PlayerProfile', () {

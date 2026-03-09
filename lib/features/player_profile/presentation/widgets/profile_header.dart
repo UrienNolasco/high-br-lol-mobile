@@ -32,7 +32,6 @@ class ProfileHeader extends StatelessWidget {
                 Text(
                   '${player.gameName}#${player.tagLine}',
                   style: const TextStyle(
-                    fontFamily: 'JetBrainsMono',
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                     color: AppColors.textPrimary,
@@ -55,8 +54,7 @@ class ProfileHeader extends StatelessWidget {
                       child: Text(
                         _tierAbbrev(player.tier),
                         style: const TextStyle(
-                          fontFamily: 'JetBrainsMono',
-                          fontSize: 11,
+                                fontSize: 11,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
@@ -66,8 +64,7 @@ class ProfileHeader extends StatelessWidget {
                     Text(
                       '${player.tier} ${player.leaguePoints} LP',
                       style: const TextStyle(
-                        fontFamily: 'JetBrainsMono',
-                        fontSize: 12,
+                            fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: AppColors.gold,
                       ),
@@ -81,8 +78,7 @@ class ProfileHeader extends StatelessWidget {
                     Text(
                       '${player.wins}W ${player.losses}L',
                       style: const TextStyle(
-                        fontFamily: 'JetBrainsMono',
-                        fontSize: 12,
+                            fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: AppColors.textSecondary,
                       ),
@@ -91,8 +87,7 @@ class ProfileHeader extends StatelessWidget {
                     const Text(
                       '·',
                       style: TextStyle(
-                        fontFamily: 'JetBrainsMono',
-                        fontSize: 12,
+                            fontSize: 12,
                         color: AppColors.textMuted,
                       ),
                     ),
@@ -100,8 +95,7 @@ class ProfileHeader extends StatelessWidget {
                     Text(
                       '${player.winRate.toStringAsFixed(1)}%',
                       style: const TextStyle(
-                        fontFamily: 'JetBrainsMono',
-                        fontSize: 12,
+                            fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: AppColors.accent,
                       ),

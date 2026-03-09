@@ -15,6 +15,7 @@ import '../widgets/profile_header.dart';
 import '../widgets/processing_banner.dart';
 import '../widgets/profile_tabs.dart';
 import '../widgets/overview_content.dart';
+import '../widgets/champions_content.dart';
 
 class PlayerProfilePage extends StatelessWidget {
   const PlayerProfilePage({super.key, required this.puuid});
@@ -39,8 +40,15 @@ class PlayerProfilePage extends StatelessWidget {
   }
 }
 
-class _PlayerProfileView extends StatelessWidget {
+class _PlayerProfileView extends StatefulWidget {
   const _PlayerProfileView();
+
+  @override
+  State<_PlayerProfileView> createState() => _PlayerProfileViewState();
+}
+
+class _PlayerProfileViewState extends State<_PlayerProfileView> {
+  int _selectedTab = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +75,6 @@ class _PlayerProfileView extends StatelessWidget {
                         Text(
                           'Perfil',
                           style: TextStyle(
-                            fontFamily: 'JetBrainsMono',
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: AppColors.textPrimary,
@@ -113,27 +120,55 @@ class _PlayerProfileView extends StatelessWidget {
               },
             ),
             // Tabs
-            const ProfileTabs(selectedIndex: 0),
-            // Body
-            Expanded(
-              child: BlocBuilder<PlayerOverviewBloc, PlayerOverviewState>(
-                builder: (context, state) {
-                  if (state is OverviewLoading) {
-                    return const LoadingIndicator();
-                  }
-                  if (state is OverviewError) {
-                    return ErrorDisplay(message: state.message);
-                  }
-                  if (state is OverviewLoaded) {
-                    return OverviewContent(data: state.data);
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
+            ProfileTabs(
+              selectedIndex: _selectedTab,
+              onTap: (index) => setState(() => _selectedTab = index),
             ),
+            // Body
+            Expanded(child: _buildTabContent()),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildTabContent() {
+    switch (_selectedTab) {
+      case 0:
+        return BlocBuilder<PlayerOverviewBloc, PlayerOverviewState>(
+          builder: (context, state) {
+            if (state is OverviewLoading) return const LoadingIndicator();
+            if (state is OverviewError) {
+              return ErrorDisplay(message: state.message);
+            }
+            if (state is OverviewLoaded) {
+              return OverviewContent(data: state.data);
+            }
+            return const SizedBox.shrink();
+          },
+        );
+      case 1:
+        return BlocBuilder<PlayerOverviewBloc, PlayerOverviewState>(
+          builder: (context, state) {
+            if (state is OverviewLoading) return const LoadingIndicator();
+            if (state is OverviewError) {
+              return ErrorDisplay(message: state.message);
+            }
+            if (state is OverviewLoaded) {
+              return ChampionsContent(champions: state.data.champions);
+            }
+            return const SizedBox.shrink();
+          },
+        );
+      default:
+        return const Center(
+          child: Text(
+            'Em breve',
+            style: TextStyle(
+              color: AppColors.textSecondary,
+            ),
+          ),
+        );
+    }
   }
 }

@@ -40,7 +40,6 @@ class OverviewContent extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontFamily: 'JetBrainsMono',
         fontSize: 10,
         fontWeight: FontWeight.w600,
         color: AppColors.textSecondary,

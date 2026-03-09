@@ -18,7 +18,53 @@ class TopChampionsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        children: champions.map((champ) {
+        children: [
+          // Header row
+          const Padding(
+            padding: EdgeInsets.only(bottom: 6),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'CHAMPION',
+                    style: TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textMuted,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 40,
+                  child: Text(
+                    'GAMES',
+                    style: TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textMuted,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                SizedBox(
+                  width: 48,
+                  child: Text(
+                    'WR%',
+                    style: TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textMuted,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(color: AppColors.border, height: 1),
+          const SizedBox(height: 4),
+          // Champions list
+          ...champions.map((champ) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
@@ -49,7 +95,6 @@ class TopChampionsCard extends StatelessWidget {
                   child: Text(
                     champ.name,
                     style: const TextStyle(
-                      fontFamily: 'JetBrainsMono',
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: AppColors.textPrimary,
@@ -57,13 +102,15 @@ class TopChampionsCard extends StatelessWidget {
                   ),
                 ),
                 // Games
-                Text(
-                  '${champ.games}',
-                  style: const TextStyle(
-                    fontFamily: 'JetBrainsMono',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textSecondary,
+                SizedBox(
+                  width: 40,
+                  child: Text(
+                    '${champ.games}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -72,9 +119,8 @@ class TopChampionsCard extends StatelessWidget {
                   width: 48,
                   child: Text(
                     '${champ.winRate.toStringAsFixed(1)}%',
-                    textAlign: TextAlign.right,
+                    textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontFamily: 'JetBrainsMono',
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: _wrColor(champ.winRate),
@@ -84,7 +130,8 @@ class TopChampionsCard extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
+        }),
+        ],
       ),
     );
   }
