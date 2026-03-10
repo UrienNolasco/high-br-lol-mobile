@@ -4,7 +4,8 @@
       "Bash(xargs grep:*)",
       "Bash(flutter analyze:*)",
       "Bash(flutter test:*)",
-      "Bash(dart run:*)"
+      "Bash(dart run:*)",
+      "Bash(grep -r \"pending\\\\|pendente\\\\|processing\\\\|processando\" /c/Users/USRTEIA-0004/Desktop/high-br-lol/high-br-lol-mobile/lib --include=\"*.dart\" 2>/dev/null | head -30)"
     ]
   }
 }
