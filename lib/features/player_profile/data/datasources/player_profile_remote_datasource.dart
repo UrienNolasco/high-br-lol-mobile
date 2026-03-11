@@ -6,6 +6,8 @@ import '../models/player_summary_model.dart';
 import '../models/player_champion_model.dart';
 import '../models/player_role_model.dart';
 import '../models/player_activity_model.dart';
+import '../models/sync_trigger_result_model.dart';
+import '../../../../features/player_search/data/models/processing_status_model.dart';
 
 @lazySingleton
 class PlayerProfileRemoteDataSource {
@@ -68,6 +70,28 @@ class PlayerProfileRemoteDataSource {
       ApiEndpoints.playerActivity(puuid),
     );
     return PlayerActivityModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  Future<SyncTriggerResultModel> triggerDeepSync({
+    required String puuid,
+  }) async {
+    final response = await _apiClient.dio.post(
+      ApiEndpoints.playerSync(puuid),
+    );
+    return SyncTriggerResultModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  Future<ProcessingStatusModel> getDeepSyncStatus({
+    required String puuid,
+  }) async {
+    final response = await _apiClient.dio.get(
+      ApiEndpoints.playerSyncStatus(puuid),
+    );
+    return ProcessingStatusModel.fromJson(
       response.data as Map<String, dynamic>,
     );
   }

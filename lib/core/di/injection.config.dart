@@ -19,10 +19,14 @@ import 'package:high_br_lol_mobile/features/player_profile/data/repositories/pla
     as _i539;
 import 'package:high_br_lol_mobile/features/player_profile/domain/repositories/player_profile_repository.dart'
     as _i295;
+import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_deep_sync_status.dart'
+    as _i782;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_player_overview.dart'
     as _i136;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_player_profile.dart'
     as _i138;
+import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/trigger_deep_sync.dart'
+    as _i69;
 import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/player_overview_bloc.dart'
     as _i945;
 import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/player_profile_bloc.dart'
@@ -84,11 +88,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i731.SearchPlayer>(
       () => _i731.SearchPlayer(gh<_i266.PlayerSearchRepository>()),
     );
+    gh.lazySingleton<_i782.GetDeepSyncStatus>(
+      () => _i782.GetDeepSyncStatus(gh<_i295.PlayerProfileRepository>()),
+    );
     gh.lazySingleton<_i136.GetPlayerOverview>(
       () => _i136.GetPlayerOverview(gh<_i295.PlayerProfileRepository>()),
     );
     gh.lazySingleton<_i138.GetPlayerProfile>(
       () => _i138.GetPlayerProfile(gh<_i295.PlayerProfileRepository>()),
+    );
+    gh.lazySingleton<_i69.TriggerDeepSync>(
+      () => _i69.TriggerDeepSync(gh<_i295.PlayerProfileRepository>()),
     );
     gh.factory<_i945.PlayerOverviewBloc>(
       () => _i945.PlayerOverviewBloc(gh<_i136.GetPlayerOverview>()),
@@ -99,14 +109,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i53.RecentSearchesLocalDataSource>(),
       ),
     );
+    gh.factory<_i757.ProcessingStatusBloc>(
+      () => _i757.ProcessingStatusBloc(gh<_i522.GetPlayerStatus>()),
+    );
     gh.factory<_i252.PlayerProfileBloc>(
       () => _i252.PlayerProfileBloc(
         gh<_i138.GetPlayerProfile>(),
         gh<_i522.GetPlayerStatus>(),
+        gh<_i69.TriggerDeepSync>(),
+        gh<_i782.GetDeepSyncStatus>(),
       ),
-    );
-    gh.factory<_i757.ProcessingStatusBloc>(
-      () => _i757.ProcessingStatusBloc(gh<_i522.GetPlayerStatus>()),
     );
     return this;
   }

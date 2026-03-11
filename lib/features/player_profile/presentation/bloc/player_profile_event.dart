@@ -23,3 +23,11 @@ class ProfileStatusPolled extends PlayerProfileEvent {
 class ProfileStatusStopped extends PlayerProfileEvent {
   const ProfileStatusStopped();
 }
+
+class DeepSyncRequested extends PlayerProfileEvent {
+  const DeepSyncRequested();
+}
+
+class DeepSyncStatusPolled extends PlayerProfileEvent {
+  const DeepSyncStatusPolled();
+}

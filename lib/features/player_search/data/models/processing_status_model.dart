@@ -21,6 +21,8 @@ class ProcessingStatusModel extends ProcessingStatus {
     return switch (status) {
       'IDLE' => UpdateStatus.idle,
       'UPDATING' => UpdateStatus.updating,
+      'SYNCING' => UpdateStatus.updating,
+      'DONE' => UpdateStatus.idle,
       'ERROR' => UpdateStatus.error,
       _ => UpdateStatus.error,
     };

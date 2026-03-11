@@ -4,6 +4,8 @@ import '../../domain/entities/player_summary.dart';
 import '../../domain/entities/player_champion.dart';
 import '../../domain/entities/player_role.dart';
 import '../../domain/entities/player_activity.dart';
+import '../../domain/entities/sync_trigger_result.dart';
+import '../../../../features/player_search/domain/entities/processing_status.dart';
 import '../../domain/repositories/player_profile_repository.dart';
 import '../datasources/player_profile_remote_datasource.dart';
 
@@ -36,5 +38,15 @@ class PlayerProfileRepositoryImpl implements PlayerProfileRepository {
   @override
   Future<PlayerActivity> getPlayerActivity({required String puuid}) {
     return _remoteDataSource.getPlayerActivity(puuid: puuid);
+  }
+
+  @override
+  Future<SyncTriggerResult> triggerDeepSync({required String puuid}) {
+    return _remoteDataSource.triggerDeepSync(puuid: puuid);
+  }
+
+  @override
+  Future<ProcessingStatus> getDeepSyncStatus({required String puuid}) {
+    return _remoteDataSource.getDeepSyncStatus(puuid: puuid);
   }
 }

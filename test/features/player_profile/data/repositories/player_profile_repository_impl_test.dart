@@ -6,7 +6,10 @@ import 'package:high_br_lol_mobile/features/player_profile/data/models/player_su
 import 'package:high_br_lol_mobile/features/player_profile/data/models/player_champion_model.dart';
 import 'package:high_br_lol_mobile/features/player_profile/data/models/player_role_model.dart';
 import 'package:high_br_lol_mobile/features/player_profile/data/models/player_activity_model.dart';
+import 'package:high_br_lol_mobile/features/player_profile/data/models/sync_trigger_result_model.dart';
 import 'package:high_br_lol_mobile/features/player_profile/data/repositories/player_profile_repository_impl.dart';
+import 'package:high_br_lol_mobile/features/player_search/data/models/processing_status_model.dart';
+import 'package:high_br_lol_mobile/features/player_search/domain/entities/processing_status.dart';
 
 class MockRemoteDataSource extends Mock
     implements PlayerProfileRemoteDataSource {}
@@ -101,5 +104,39 @@ void main() {
     final result = await repository.getPlayerActivity(puuid: tPuuid);
 
     expect(result, tActivity);
+  });
+
+  test('should trigger deep sync via datasource', () async {
+    const tResult = SyncTriggerResultModel(
+      puuid: tPuuid,
+      status: 'SYNCING',
+      matchesEnqueued: 5,
+      matchesTotal: 42,
+      matchesAlreadyInDb: 37,
+      message: 'Sync started',
+    );
+    when(() => mockDataSource.triggerDeepSync(puuid: any(named: 'puuid')))
+        .thenAnswer((_) async => tResult);
+
+    final result = await repository.triggerDeepSync(puuid: tPuuid);
+
+    expect(result, tResult);
+    verify(() => mockDataSource.triggerDeepSync(puuid: tPuuid)).called(1);
+  });
+
+  test('should get deep sync status via datasource', () async {
+    const tSyncStatus = ProcessingStatusModel(
+      status: UpdateStatus.updating,
+      matchesProcessed: 30,
+      matchesTotal: 42,
+      message: 'Sync in progress',
+    );
+    when(() => mockDataSource.getDeepSyncStatus(puuid: any(named: 'puuid')))
+        .thenAnswer((_) async => tSyncStatus);
+
+    final result = await repository.getDeepSyncStatus(puuid: tPuuid);
+
+    expect(result, tSyncStatus);
+    verify(() => mockDataSource.getDeepSyncStatus(puuid: tPuuid)).called(1);
   });
 }

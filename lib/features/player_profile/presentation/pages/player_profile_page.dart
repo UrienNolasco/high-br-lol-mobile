@@ -54,79 +54,98 @@ class _PlayerProfileViewState extends State<_PlayerProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPrimary,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Back row
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => context.pop(),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.arrow_back,
-                          color: AppColors.textPrimary,
-                          size: 24,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Perfil',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+      body: BlocListener<PlayerProfileBloc, PlayerProfileState>(
+        listenWhen: (prev, curr) =>
+            curr is ProfileLoaded && curr.syncError != null,
+        listener: (context, state) {
+          if (state is ProfileLoaded && state.syncError != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.syncError!),
+                backgroundColor: Colors.red.shade700,
+              ),
+            );
+          }
+        },
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Back row
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => context.pop(),
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_back,
                             color: AppColors.textPrimary,
+                            size: 24,
                           ),
+                          SizedBox(width: 8),
+                          Text(
+                            'Perfil',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Header + Banner
+              BlocBuilder<PlayerProfileBloc, PlayerProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const SizedBox(
+                      height: 80,
+                      child: LoadingIndicator(),
+                    );
+                  }
+                  if (state is ProfileError) {
+                    return ErrorDisplay(
+                      message: state.message,
+                      onRetry: () => context.read<PlayerProfileBloc>().add(
+                            ProfileStarted(
+                              puuid: (context.read<PlayerProfileBloc>()
+                                      .state as ProfileError)
+                                  .message,
+                            ),
+                          ),
+                    );
+                  }
+                  if (state is ProfileLoaded) {
+                    return Column(
+                      children: [
+                        ProfileHeader(player: state.player),
+                        ProcessingBanner(
+                          bannerMode: state.bannerMode,
+                          status: state.processingStatus,
+                          onTap: () => context
+                              .read<PlayerProfileBloc>()
+                              .add(const DeepSyncRequested()),
                         ),
                       ],
-                    ),
-                  ),
-                ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
-            ),
-            // Header
-            BlocBuilder<PlayerProfileBloc, PlayerProfileState>(
-              builder: (context, state) {
-                if (state is ProfileLoading) {
-                  return const SizedBox(
-                    height: 80,
-                    child: LoadingIndicator(),
-                  );
-                }
-                if (state is ProfileError) {
-                  return ErrorDisplay(
-                    message: state.message,
-                    onRetry: () => context.read<PlayerProfileBloc>().add(
-                          ProfileStarted(
-                            puuid: (context.read<PlayerProfileBloc>()
-                                    .state as ProfileError)
-                                .message,
-                          ),
-                        ),
-                  );
-                }
-                if (state is ProfileLoaded) {
-                  return Column(
-                    children: [
-                      ProfileHeader(player: state.player),
-                      if (state.isProcessing)
-                        ProcessingBanner(status: state.processingStatus!),
-                    ],
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-            // Tabs
-            ProfileTabs(
-              selectedIndex: _selectedTab,
-              onTap: (index) => setState(() => _selectedTab = index),
-            ),
-            // Body
-            Expanded(child: _buildTabContent()),
-          ],
+              // Tabs
+              ProfileTabs(
+                selectedIndex: _selectedTab,
+                onTap: (index) => setState(() => _selectedTab = index),
+              ),
+              // Body
+              Expanded(child: _buildTabContent()),
+            ],
+          ),
         ),
       ),
     );

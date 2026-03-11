@@ -62,4 +62,28 @@ void main() {
     final model = ProcessingStatusModel.fromJson(json);
     expect(model.status, UpdateStatus.error);
   });
+
+  test('should parse SYNCING status as updating', () {
+    final json = {
+      'status': 'SYNCING',
+      'matchesProcessed': 30,
+      'matchesTotal': 42,
+      'message': 'Sync in progress: 30/42 matches processed',
+    };
+    final model = ProcessingStatusModel.fromJson(json);
+    expect(model.status, UpdateStatus.updating);
+    expect(model.matchesProcessed, 30);
+    expect(model.matchesTotal, 42);
+  });
+
+  test('should parse DONE status as idle', () {
+    final json = {
+      'status': 'DONE',
+      'matchesProcessed': 42,
+      'matchesTotal': 42,
+      'message': 'Sync complete',
+    };
+    final model = ProcessingStatusModel.fromJson(json);
+    expect(model.status, UpdateStatus.idle);
+  });
 }
