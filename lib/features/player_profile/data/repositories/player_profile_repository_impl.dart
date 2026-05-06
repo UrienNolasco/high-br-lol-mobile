@@ -4,6 +4,7 @@ import '../../domain/entities/player_summary.dart';
 import '../../domain/entities/player_champion.dart';
 import '../../domain/entities/player_role.dart';
 import '../../domain/entities/player_activity.dart';
+import '../../domain/entities/heatmap_data.dart';
 import '../../domain/entities/sync_trigger_result.dart';
 import '../../../../features/player_search/domain/entities/processing_status.dart';
 import '../../domain/repositories/player_profile_repository.dart';
@@ -38,6 +39,11 @@ class PlayerProfileRepositoryImpl implements PlayerProfileRepository {
   @override
   Future<PlayerActivity> getPlayerActivity({required String puuid}) {
     return _remoteDataSource.getPlayerActivity(puuid: puuid);
+  }
+
+  @override
+  Future<HeatmapData> getPlayerHeatmap({required String puuid}) {
+    return _remoteDataSource.getPlayerHeatmap(puuid: puuid);
   }
 
   @override

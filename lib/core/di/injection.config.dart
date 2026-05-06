@@ -21,12 +21,16 @@ import 'package:high_br_lol_mobile/features/player_profile/domain/repositories/p
     as _i295;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_deep_sync_status.dart'
     as _i782;
+import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_player_heatmap.dart'
+    as _i561;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_player_overview.dart'
     as _i136;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/get_player_profile.dart'
     as _i138;
 import 'package:high_br_lol_mobile/features/player_profile/domain/usecases/trigger_deep_sync.dart'
     as _i69;
+import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/player_heatmap_bloc.dart'
+    as _i186;
 import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/player_overview_bloc.dart'
     as _i945;
 import 'package:high_br_lol_mobile/features/player_profile/presentation/bloc/player_profile_bloc.dart'
@@ -91,6 +95,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i782.GetDeepSyncStatus>(
       () => _i782.GetDeepSyncStatus(gh<_i295.PlayerProfileRepository>()),
     );
+    gh.lazySingleton<_i561.GetPlayerHeatmap>(
+      () => _i561.GetPlayerHeatmap(gh<_i295.PlayerProfileRepository>()),
+    );
     gh.lazySingleton<_i136.GetPlayerOverview>(
       () => _i136.GetPlayerOverview(gh<_i295.PlayerProfileRepository>()),
     );
@@ -102,6 +109,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i945.PlayerOverviewBloc>(
       () => _i945.PlayerOverviewBloc(gh<_i136.GetPlayerOverview>()),
+    );
+    gh.factory<_i186.PlayerHeatmapBloc>(
+      () => _i186.PlayerHeatmapBloc(gh<_i561.GetPlayerHeatmap>()),
     );
     gh.factory<_i1041.PlayerSearchBloc>(
       () => _i1041.PlayerSearchBloc(

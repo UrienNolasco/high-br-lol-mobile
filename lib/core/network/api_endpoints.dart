@@ -6,7 +6,7 @@ abstract final class ApiEndpoints {
   static String playerChampions(String puuid) => '/players/$puuid/champions';
   static String playerRoles(String puuid) => '/players/$puuid/roles';
   static String playerActivity(String puuid) => '/players/$puuid/activity';
-  static String playerMatches(String puuid) => '/players/$puuid/matches/page';
+  static String playerMatches(String puuid) => '/players/$puuid/matches';
   static String playerSync(String puuid) => '/players/$puuid/sync';
   static String playerSyncStatus(String puuid) =>
       '/players/$puuid/sync-status';

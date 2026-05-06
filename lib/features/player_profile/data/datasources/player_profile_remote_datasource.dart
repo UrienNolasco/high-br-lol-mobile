@@ -6,6 +6,7 @@ import '../models/player_summary_model.dart';
 import '../models/player_champion_model.dart';
 import '../models/player_role_model.dart';
 import '../models/player_activity_model.dart';
+import '../models/heatmap_data_model.dart';
 import '../models/sync_trigger_result_model.dart';
 import '../../../../features/player_search/data/models/processing_status_model.dart';
 
@@ -92,6 +93,17 @@ class PlayerProfileRemoteDataSource {
       ApiEndpoints.playerSyncStatus(puuid),
     );
     return ProcessingStatusModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  Future<HeatmapDataModel> getPlayerHeatmap({
+    required String puuid,
+  }) async {
+    final response = await _apiClient.dio.get(
+      ApiEndpoints.playerActivity(puuid),
+    );
+    return HeatmapDataModel.fromJson(
       response.data as Map<String, dynamic>,
     );
   }

@@ -11,11 +11,18 @@ import '../bloc/player_profile_state.dart';
 import '../bloc/player_overview_bloc.dart';
 import '../bloc/player_overview_event.dart';
 import '../bloc/player_overview_state.dart';
+import '../bloc/player_heatmap_bloc.dart';
+import '../bloc/player_heatmap_event.dart';
+import '../bloc/player_heatmap_state.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/processing_banner.dart';
 import '../widgets/profile_tabs.dart';
 import '../widgets/overview_content.dart';
 import '../widgets/champions_content.dart';
+import '../widgets/heatmap_cell_detail.dart';
+import '../widgets/heatmap_grid.dart';
+import '../widgets/heatmap_insights_panel.dart';
+import '../widgets/heatmap_metric_toggle.dart';
 
 class PlayerProfilePage extends StatelessWidget {
   const PlayerProfilePage({super.key, required this.puuid});
@@ -33,6 +40,10 @@ class PlayerProfilePage extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<PlayerOverviewBloc>()
             ..add(OverviewStarted(puuid: puuid)),
+        ),
+        BlocProvider(
+          create: (_) => getIt<PlayerHeatmapBloc>()
+            ..add(HeatmapStarted(puuid: puuid)),
         ),
       ],
       child: const _PlayerProfileView(),
@@ -175,6 +186,86 @@ class _PlayerProfileViewState extends State<_PlayerProfileView> {
             }
             if (state is OverviewLoaded) {
               return ChampionsContent(champions: state.data.champions);
+            }
+            return const SizedBox.shrink();
+          },
+        );
+      case 2:
+        return const Center(
+          child: Text(
+            'Em breve',
+            style: TextStyle(
+              color: AppColors.textSecondary,
+            ),
+          ),
+        );
+      case 3:
+        return BlocBuilder<PlayerHeatmapBloc, PlayerHeatmapState>(
+          builder: (context, state) {
+            if (state is HeatmapLoading) return const LoadingIndicator();
+            if (state is HeatmapError) {
+              return ErrorDisplay(
+                message: state.message,
+                onRetry: () {
+                  final bloc = context.read<PlayerHeatmapBloc>();
+                  final profileBloc = context.read<PlayerProfileBloc>();
+                  final currentState = profileBloc.state;
+                  final puuid = currentState is ProfileLoaded
+                      ? currentState.player.puuid
+                      : '';
+                  bloc.add(HeatmapStarted(puuid: puuid));
+                },
+              );
+            }
+            if (state is HeatmapLoaded) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HeatmapMetricToggle(
+                      selectedMetric: state.selectedMetric.name,
+                      onChanged: (metric) {
+                        final heatmapMetric = HeatmapMetric.values
+                            .firstWhere((m) => m.name == metric);
+                        context.read<PlayerHeatmapBloc>().add(
+                              MetricToggled(heatmapMetric),
+                            );
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    HeatmapGrid(
+                      cells: state.data.cells,
+                      selectedMetric: state.selectedMetric,
+                      selectedDayOfWeek: state.selectedDayOfWeek,
+                      selectedHour: state.selectedHour,
+                      onCellTapped: (day, hour) {
+                        context.read<PlayerHeatmapBloc>().add(
+                              CellTapped(dayOfWeek: day, hour: hour),
+                            );
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    if (state.selectedDayOfWeek != null &&
+                        state.selectedHour != null)
+                      ...(() {
+                        final selectedCell = state.data.cells.firstWhere(
+                          (c) =>
+                              c.dayOfWeek == state.selectedDayOfWeek &&
+                              c.hour == state.selectedHour,
+                          orElse: () => state.data.cells.first,
+                        );
+                        return [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: HeatmapCellDetail(cell: selectedCell),
+                          ),
+                        ];
+                      })(),
+                    HeatmapInsightsPanel(insights: state.data.insights),
+                  ],
+                ),
+              );
             }
             return const SizedBox.shrink();
           },
